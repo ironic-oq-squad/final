@@ -1,16 +1,15 @@
 ## Packages
 #install.packages('factoextra')
 library('factoextra')
-library(readr)
+library('readr')
 
 
 ## Read in data
-setwd("C:/Users/smith/Google Drive/BDSI/grace-sandbox/Data")
+setwd("C:/Users/smith/Google Drive/BDSI/final/Data")
 d_hat <- read_csv("d_hat.csv")
 
 
 ## Evaluation methods for k-medoids
-set.seed(123)
 
 #Elbow method WSS: best k is at the elbow
 fviz_nbclust(d_hat, cluster::pam, method = "wss", k.max=30)+
@@ -22,5 +21,4 @@ fviz_nbclust(d_hat, cluster::pam, method = "silhouette", k.max=30)+
 
 
 ## After choosing the optimal number of clusters based on these
-  ## evaluation metrics, use that number as your input
-  ## in P3_synonyms.py
+  ## evaluation metrics, use that number as your input in P3_synonyms.py

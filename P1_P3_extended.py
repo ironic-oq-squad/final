@@ -1,14 +1,15 @@
-################################################################################
-################################################################################
-#############   PART 3 --> finding and adding synonyms to tweets
-################################################################################
-################################################################################
-
+####################################################################################
+####################################################################################
+#############   PART 1 Extended --> getting the distance matrices, adding synonyms
+####################################################################################
+####################################################################################
 
 
 ## packages
 import os 
 import csv
+import pandas as pd
+from collections import OrderedDict
 import numpy as np
 import random
 from pyclustering.cluster.kmedoids import kmedoids
@@ -19,29 +20,62 @@ import math
 from nltk.stem import PorterStemmer
 
 
-## Loading cleaned tweets and tweet distance matrix
-os.chdir(r'C:\Users\smith\Google Drive\BDSI\final\Data')
-fileRead = csv.reader(open('clean_data.csv', encoding="utf8"))
-tweetsProcessed = list()
+## first, read in functions from 'distanceMatrices.py'
+# os.chdir('')
+import distanceMatrices_final
+
+
+
+## Read in data
+
+## Read in data
+## Change this to whatever your data's filepath is
+os.chdir(r'C:\Users\smith\Google Drive\BDSI\grace-sandbox\Data')
+
+## Change this to whatever your data's filename is
+fileRead = csv.reader(open('Twitter_mani.csv', encoding="utf8"))
+tweets = list()
 for row in fileRead:
-	tweetsProcessed.append(row[0])
+	tweets.append(row[1])   ## change this depending on how your data is stored
+tweets_dup=tweets[1:]
 
 
-fileRead2 = csv.reader(open('s.csv', encoding="utf8"))
-s = list()
-for row in fileRead2:
- 	s.append(row)
+## Pre-processing
+tweetsProcessed = [distanceMatrices_final.preProcessingFcn(tweet) for tweet in tweets_dup]
+print("# tweets before removing duplicates: " + str(len(tweetsProcessed)))
+tweetsProcessed = list(OrderedDict.fromkeys(tweetsProcessed))  # removing duplicates
+print("# tweets after removing duplicates: " + str(len(tweetsProcessed)))
 
 
-## Now with the optimal number of clusters chosen from R, run k-medoids
+## Calculate Distance Matrix
+minMentions = 20
+wordDistMethod = 'condProb'
+newMethod = distanceMatrices_final.makeMatrices(tweetsProcessed, minMentions=minMentions, preProcess=False, wordDistMethod=wordDistMethod)
+
+## Printing information
+print('Number of tweets originally: ' + str(newMethod['nOriginal']))
+print('Number of original unique words: ' + str(newMethod['vOriginal']))
+print('Number of tweets after removing "pointless babble": ' + str(newMethod['n']))
+print('Number of words appearing at least ' + str(minMentions) + ' times: ' + str(newMethod['v']))
+
+
+## Save Distance Matrix to a CSV
+os.chdir(r'C:\Users\smith\Google Drive\BDSI\final\Data')
+d = newMethod['d']
+df=pd.DataFrame(d)
+df.to_csv('d_hat.csv', header = True, index=False)
+
+
+## FROM HERE WE GO TO R FOR EVALUATION to choose the best number of clusters
+## With the optimal number of clusters chosen from R, run k-medoids
 optimal = input("Go to R for cluster evaluation. Enter the optimal number of clusters: ")
 numberTopics = int(optimal)
-
 
 
 print("Starting k-medoids")
 # tweets
 random.seed(123)
+s = newMethod['s']
 kmedoids_instance_tweets = kmedoids(s, range(numberTopics), data_type='distance_matrix')
 
 kmedoids_instance_tweets.process()

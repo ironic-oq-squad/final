@@ -5,7 +5,6 @@
 ################################################################################
 
 
-
 ## packages
 import os 
 import csv
@@ -14,23 +13,27 @@ from collections import OrderedDict
 
 
 ## first, read in functions from 'distanceMatrices.py'
-os.chdir(r'C:\Users\smith\Google Drive\BDSI\grace-sandbox\Data')
-import distanceMatrices
+# os.chdir('')
+import distanceMatrices_final
+
+
+
+## Read in data
 
 ## Read in data
 ## Change this to whatever your data's filepath is
-os.chdir(r'C:\Users\smith\Google Drive\BDSI\sasha-sandbox')
+os.chdir(r'C:\Users\smith\Google Drive\BDSI\grace-sandbox\Data')
 
 ## Change this to whatever your data's filename is
-fileRead = csv.reader(open('VT_incentive_v2.csv', encoding="utf8"))
+fileRead = csv.reader(open('Twitter_mani.csv', encoding="utf8"))
 tweets = list()
 for row in fileRead:
-	tweets.append(row[1])
+	tweets.append(row[1])   ## change this depending on how your data is stored
 tweets_dup=tweets[1:]
 
 
 ## Pre-processing
-tweetsProcessed = [distanceMatrices.preProcessingFcn(tweet) for tweet in tweets_dup]
+tweetsProcessed = [distanceMatrices_final.preProcessingFcn(tweet) for tweet in tweets_dup]
 print("# tweets before removing duplicates: " + str(len(tweetsProcessed)))
 tweetsProcessed = list(OrderedDict.fromkeys(tweetsProcessed))  # removing duplicates
 print("# tweets after removing duplicates: " + str(len(tweetsProcessed)))
@@ -39,7 +42,7 @@ print("# tweets after removing duplicates: " + str(len(tweetsProcessed)))
 ## Calculate Distance Matrix
 minMentions = 20
 wordDistMethod = 'condProb'
-newMethod = distanceMatrices.makeMatrices(tweetsProcessed, minMentions=minMentions, preProcess=False, wordDistMethod=wordDistMethod)
+newMethod = distanceMatrices_final.makeMatrices(tweetsProcessed, minMentions=minMentions, preProcess=False, wordDistMethod=wordDistMethod)
 
 ## Printing information
 print('Number of tweets originally: ' + str(newMethod['nOriginal']))
@@ -49,7 +52,7 @@ print('Number of words appearing at least ' + str(minMentions) + ' times: ' + st
 
 
 ## Save Distance Matrix to a CSV
-os.chdir(r'C:\Users\smith\Google Drive\BDSI\grace-sandbox\Data')
+os.chdir(r'C:\Users\smith\Google Drive\BDSI\final\Data')
 d = newMethod['d']
 ddf=pd.DataFrame(d)
 ddf.to_csv('d_hat.csv', header = True, index=False)
