@@ -21,7 +21,7 @@ Note that you should bring your own data files into the ./data folder on your lo
 RUNNING THE CONTAINER
 NOTE: You should run this in your local Git repository
 
-docker run -it --name dm3-python -v "$PWD":/var/app/bdsi -w /var/app/bdsi bdsi-dm3-python
+docker run -it --name dm3-python -v "$PWD":/var/app/bdsi -w /var/app/bdsi sashalioutikova/bdsi-dm3-python
 
 
 RUNNING THE FILE(S)
@@ -41,7 +41,7 @@ e.g. python3 ./src/P1_P3_extended.py ./data/Twitter_mani.csv 4
 JUPYTER
 If you need to use Docker to use Jupyter notebooks, use the following instructions:
 Run the container:
-docker run -p 8888:8888 -it --name dm3-python -v "$PWD":/var/app/bdsi -w /var/app/bdsi bdsi-dm3-python
+docker run -p 8888:8888 -it --name dm3-python -v "$PWD":/var/app/bdsi -w /var/app/bdsi sashalioutikova/bdsi-dm3-python
 
 Install Jupyter:
 pip3 install jupyter
