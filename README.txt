@@ -7,6 +7,9 @@ DOCKER PULL COMMAND
 
 docker pull sashalioutikova/bdsi-dm3-python
 
+If the pull fails, make your own Docker image using files in the GitHub with the following command:
+docker build -t bdsi-dm3-python . 
+
 
 GIT PULL COMMAND
 
