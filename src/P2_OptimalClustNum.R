@@ -5,7 +5,8 @@ library('readr')
 
 
 ## Read in data
-setwd("./data")
+getwd()
+setwd("../data")
 d_hat <- read_csv("d_hat.csv")
 
 

@@ -35,8 +35,8 @@ len_argv = len(sys.argv)
 
 # python3 validation_synonyms.py [filepath] [tweet index in csv]
 if len_argv == 1:
-    path_in = "./data/Twitter_mani.csv"
-    tweet_index = 4
+    path_in = "./data/VT_incentive_v2.csv"
+    tweet_index = 1
 elif len_argv == 3:
     path_in = sys.argv[1]
     tweet_index = int(sys.argv[2])
@@ -224,7 +224,7 @@ path_out_clean_stem = re.sub(r'\.csv$', '_clean_stem.csv', path_in)
 path_out_altered_stem = re.sub(r'\.csv$', '_altered_stem.csv', path_in)
 
 write_data(path_out_clean, tweetsProcessed)
-# write_data(path_out_altered, tweetsAltered)
+write_data(path_out_altered, tweetsAltered)
 # write_data(path_out_clean_stem, tweetsProcessed_stem)
 write_data(path_out_altered_stem, tweetsAltered_stem)
 print('data saved')

@@ -20,7 +20,8 @@ library(topicmodels)
 ## the data frame "topic" should only contain a column vector of tweets with header 'text'
 
 setwd("../data")
-topic = read_csv("d_hat.csv") #Vaccine_Trust_cleaned #VT_incentive_v2 # VT_nonincentive_v2
+topic = read_csv("VT_incentive_v2_clean.csv") # your clean dataset
+# e.g. VT_incentive_v2_clean, VT_incentive_v2_altered
 
 topic = unique(topic) # removing empty tweets
 
@@ -43,7 +44,8 @@ dfmat_tweets<-dfm(tok) # creating term-doc mat
 
 ####### expression ########
 
-nsim = 3000 # put nsim = nrow(topic) if corpus size is reasonable
+# nsim = 3000 # put nsim = nrow(topic) if corpus size is reasonable
+nsim = min(c(nrow(topic), 3000))
 set.seed(2021)
 sam = sample(1:nrow(dfmat_tweets),nsim)
 
