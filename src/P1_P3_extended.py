@@ -36,7 +36,7 @@ len_argv = len(sys.argv)
 # python3 validation_synonyms.py [filepath] [tweet index in csv]
 if len_argv == 1:
     path_in = "./data/VT_incentive_v2.csv"
-    tweet_index = 1
+    tweet_index = 4
 elif len_argv == 3:
     path_in = sys.argv[1]
     tweet_index = int(sys.argv[2])
@@ -55,6 +55,9 @@ for row in fileRead:
 	tweets.append(row[tweet_index])   ## change this depending on how your data is stored
 tweets_dup=tweets[1:]
 
+random.seed(345)
+sample = random.sample(range(len(tweets_dup)), 500)
+tweets_dup = [tweets_dup[i] for i in sample]
 
 ## Pre-processing
 tweetsProcessed = [distanceMatrices_final.preProcessingFcn(tweet) for tweet in tweets_dup]
@@ -225,6 +228,6 @@ path_out_altered_stem = re.sub(r'\.csv$', '_altered_stem.csv', path_in)
 
 write_data(path_out_clean, tweetsProcessed)
 write_data(path_out_altered, tweetsAltered)
-# write_data(path_out_clean_stem, tweetsProcessed_stem)
+write_data(path_out_clean_stem, tweetsProcessed_stem)
 write_data(path_out_altered_stem, tweetsAltered_stem)
 print('data saved')

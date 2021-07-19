@@ -184,8 +184,8 @@ print('stemming tweets done')
 
 ## Writing data
 path_out_altered = re.sub(r'\.csv$', '_altered.csv', path_in)
-# path_out_clean_stem = re.sub(r'\.csv$', '_clean_stem.csv', path_in)
-path_out_altered_stem = re.sub(r'\.csv$', '_altered_stem.csv', path_in)
+path_out_clean_stem = re.sub(r'\.csv$', '_stem.csv', path_in)
+path_out_altered_stem = re.sub(r'\.csv$', '_altered_stemmed.csv', path_in)
 
 write_data(path_out_altered, tweetsAltered)
 write_data(path_out_clean_stem, tweetsProcessed_stem)
