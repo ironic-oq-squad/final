@@ -19,7 +19,8 @@ library(topicmodels)
 
 ## the data frame "topic" should only contain a column vector of tweets with header 'text'
 
-topic = read_csv("Vaccine_Trust_cleaned.csv") #Vaccine_Trust_cleaned #VT_incentive_v2 # VT_nonincentive_v2
+setwd("../data")
+topic = read_csv("d_hat.csv") #Vaccine_Trust_cleaned #VT_incentive_v2 # VT_nonincentive_v2
 
 topic = unique(topic) # removing empty tweets
 
