@@ -25,7 +25,7 @@ import nltk
 ### define functions needed for makeMatrices function
 ## pre-processing: stem, remove URLs and stop words
 def preProcessingFcn(tweet, removeWords=list(), stem=False, removeURL=True, removeStopwords=True, 
-	removeNumbers=True, removeHashtags=True, removeAt=True, removePunctuation=True, lem=True):
+	removeNumbers=True, removeHashtags=True, removeAt=True, removePunctuation=True, lem=True, demojify=True):
 	ps = PorterStemmer()
 	lm = WordNetLemmatizer()
 	tweet = tweet.lower()
