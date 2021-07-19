@@ -38,6 +38,14 @@ python3 ./src/P1_P3_extended.py [filepath to data] [tweet index column in csv]
 e.g. python3 ./src/P1_P3_extended.py ./data/Twitter_mani.csv 4
 
 
+PIPELINE
+1. P1_P3_extended.py (until prompted for # clusters)
+2. P2_OptimalClustNum.R
+3. P1_P3_extended.py (input # clusters discovered from P2_OptimalClustNum.R)
+4. LDA_Topic_Detection.R (IMPORTANT: manually change input file to file created from P1_P3_extended.py)
+
+
+
 JUPYTER
 If you need to use Docker to use Jupyter notebooks, use the following instructions:
 Run the container:
