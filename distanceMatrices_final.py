@@ -14,6 +14,12 @@ import re
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer
 from nltk.stem import WordNetLemmatizer
+import demoji
+demoji.download_codes()
+import nltk
+# nltk.download('stopwords')
+# nltk.download('wordnet')
+# nltk.download('punkt')
 
 
 ### define functions needed for makeMatrices function
@@ -31,6 +37,8 @@ def preProcessingFcn(tweet, removeWords=list(), stem=False, removeURL=True, remo
 		tweet = tweet.replace('@', ' ')
 	if removeNumbers==True:
 		tweet=  ''.join(i for i in tweet if not i.isdigit())
+	if demojify==True:
+		tweet=demoji.replace(tweet)
 	if removePunctuation==True:
 		tweet = re.sub(r"[,.;@#?!&$:]+\ *", " ", tweet)
 	if removeStopwords==True:

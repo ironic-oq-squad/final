@@ -36,7 +36,7 @@ os.chdir(r'C:\Users\smith\Google Drive\BDSI\grace-sandbox\Data')
 fileRead = csv.reader(open('Twitter_mani.csv', encoding="utf8"))
 tweets = list()
 for row in fileRead:
-	tweets.append(row[1])   ## change this depending on how your data is stored
+	tweets.append(row[4])   ## change this depending on how your data is stored
 tweets_dup=tweets[1:]
 
 
