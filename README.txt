@@ -2,6 +2,13 @@ DATA MINING GROUP 3 - DOCKER
 
 This project is a part of UMich BDSI. To be shared with other groups in the Data Mining group.
 
+RESEARCH QUESTION
+How do vaccine sentiments vary between states with vs without vaccine incentives?
+
+DATA TO USE
+VT_incentive_v2.csv
+VT_nonincentive_v2.csv
+
 
 DOCKER PULL COMMAND
 
