@@ -55,9 +55,6 @@ for row in fileRead:
 	tweets.append(row[tweet_index])   ## change this depending on how your data is stored
 tweets_dup=tweets[1:]
 
-random.seed(345)
-sample = random.sample(range(len(tweets_dup)), 500)
-tweets_dup = [tweets_dup[i] for i in sample]
 
 ## Pre-processing
 tweetsProcessed = [distanceMatrices_final.preProcessingFcn(tweet) for tweet in tweets_dup]
