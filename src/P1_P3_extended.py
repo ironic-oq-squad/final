@@ -36,7 +36,7 @@ len_argv = len(sys.argv)
 # python3 validation_synonyms.py [filepath] [tweet index in csv]
 if len_argv == 1:
     path_in = "./data/VT_incentive_v2.csv"
-    tweet_index = 4
+    tweet_index = 1
 elif len_argv == 3:
     path_in = sys.argv[1]
     tweet_index = int(sys.argv[2])
@@ -55,12 +55,28 @@ for row in fileRead:
 	tweets.append(row[tweet_index])   ## change this depending on how your data is stored
 tweets_dup=tweets[1:]
 
-
+print(tweets_dup)
 ## Pre-processing
 tweetsProcessed = [distanceMatrices_final.preProcessingFcn(tweet) for tweet in tweets_dup]
 print("# tweets before removing duplicates: " + str(len(tweetsProcessed)))
-tweetsProcessed = list(OrderedDict.fromkeys(tweetsProcessed))  # removing duplicates
+
+res_list = []
+remove_list = []
+for i in range(len(tweetsProcessed)):
+    # print(tweetsProcessed[i])
+    if tweetsProcessed[i] not in tweetsProcessed[i+1:]:
+        res_list.append(tweetsProcessed[i])
+    else:
+        remove_list.append(i)
+
+print(remove_list)
+tweetsProcessed = res_list
 print("# tweets after removing duplicates: " + str(len(tweetsProcessed)))
+
+for i in remove_list:
+    del tweets_dup[i]
+
+tweets_nodup = tweets_dup
 
 
 ## Calculate Distance Matrix
@@ -227,4 +243,5 @@ write_data(path_out_clean, tweetsProcessed)
 write_data(path_out_altered, tweetsAltered)
 write_data(path_out_clean_stem, tweetsProcessed_stem)
 write_data(path_out_altered_stem, tweetsAltered_stem)
+# write_data('./data/tweets_nodup_incentive.csv', tweets_nodup)
 print('data saved')
