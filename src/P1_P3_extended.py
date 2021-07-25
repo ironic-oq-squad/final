@@ -39,7 +39,7 @@ if len_argv == 1:
     tweet_index = 1
 elif len_argv == 3:
     path_in = sys.argv[1]
-    tweet_index = int(sys.argv[2])
+    tweet_index = int(sys.argv[1])
 else:
     print("ERROR")
     print("Usage: python3 P1_P3_extended.py [filepath to data] [tweet index in csv]")
@@ -49,7 +49,7 @@ else:
 # os.chdir(r'C:\Users\smith\Google Drive\BDSI\grace-sandbox\Data')
 
 ## Change this to whatever your data's filename is
-fileRead = csv.reader(open(path_in, encoding="utf8"))
+fileRead = csv.reader(open(path_in, encoding="utf-8"))
 tweets = list()
 for row in fileRead:
 	tweets.append(row[tweet_index])   ## change this depending on how your data is stored
@@ -243,5 +243,5 @@ write_data(path_out_clean, tweetsProcessed)
 write_data(path_out_altered, tweetsAltered)
 write_data(path_out_clean_stem, tweetsProcessed_stem)
 write_data(path_out_altered_stem, tweetsAltered_stem)
-# write_data('./data/tweets_nodup_incentive.csv', tweets_nodup)
+write_data('./data/tweets_nodup_incentive.csv', tweets_nodup)
 print('data saved')
