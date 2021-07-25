@@ -28,8 +28,8 @@ len_argv = len(sys.argv)
 
 # python3 validation_synonyms.py [filepath] [tweet index in csv]
 if len_argv == 1:
-    path_in = "./data/Twitter_mani.csv"
-    tweet_index = 4
+    path_in = "./data/VT_incentive_v2.csv"
+    tweet_index = 1
 elif len_argv == 3:
     path_in = sys.argv[1]
     tweet_index = int(sys.argv[2])
@@ -86,6 +86,8 @@ def write_data(filepath, tweets):
 
 path_out = re.sub(r'\.csv$', '_clean.csv', path_in)
 write_data(path_out, tweetsProcessed)
+
+
 
 ## FROM HERE WE GO TO R FOR EVALUATION
     ## to choose the best number of clusters
