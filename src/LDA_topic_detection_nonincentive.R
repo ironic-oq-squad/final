@@ -19,8 +19,8 @@ library(topicmodels)
 
 ## the data frame "topic" should only contain a column vector of tweets with header 'text'
 
-setwd("/Users/smith/Desktop/sasha-sandbox/dm3_testing")  # CHANGE BACK TO ../data
-topic = read_csv("VT_nonincentive_v2_altered_stem.csv") # your clean dataset
+setwd("/Users/smith/Google Drive/BDSI/final/data") 
+topic = read_csv("tweets_nonincentive_v3_alter_stem.csv") # your clean dataset
 # e.g. VT_incentive_v2_clean, VT_incentive_v2_altered
 dim(topic)
 topic = unique(topic) # removing empty tweets
@@ -212,43 +212,43 @@ serVis(json)
 new.order <- RJSONIO::fromJSON(json)$topic.order
 print(new.order)
 
+# 
+# list_nonincentive <- list()
+# list_nonincentive[[1]] <- c(2, 10, 16, 34)
+# list_nonincentive[[2]] <-c(1, 3, 4, 5, 6, 7, 11, 12, 13, 17, 33, 50)
+# list_nonincentive[[3]] <- c(8, 9, 14, 15, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49)
+# 
+# 
+# # grouping clusters -- key_words indices
+# 
+# list2_nonincentive <- list()
+# for(i in 1:length(list_nonincentive)) {
+#   list2_nonincentive[[i]] <- new.order[list_nonincentive[[i]]]
+# }
+# 
+# # grabbing tweets
+# tweet_new_clust_nonincentive <- vector(mode = "list", length = 3)
+# for(i in 1:3) {
+#   vec <- list2_nonincentive[[i]]
+#   for(j in vec) {
+#     tweet_new_clust_nonincentive[[i]] <- c(tweet_new_clust_nonincentive[[i]], tweet_clusters[[j]])
+#   }
+# }
 
-list_nonincentive <- list()
-list_nonincentive[[1]] <- c(2, 10, 16, 34)
-list_nonincentive[[2]] <-c(1, 3, 4, 5, 6, 7, 11, 12, 13, 17, 33, 50)
-list_nonincentive[[3]] <- c(8, 9, 14, 15, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49)
+
+## need to run this to see if we can leave out the above clustering code
+    ## at least for now
 
 
-# grouping clusters -- key_words indices
-
-list2_nonincentive <- list()
-for(i in 1:length(list_nonincentive)) {
-  list2_nonincentive[[i]] <- new.order[list_nonincentive[[i]]]
-}
-
-# grabbing tweets
-tweet_new_clust_nonincentive <- vector(mode = "list", length = 3)
-for(i in 1:3) {
-  vec <- list2_nonincentive[[i]]
-  for(j in vec) {
-    tweet_new_clust_nonincentive[[i]] <- c(tweet_new_clust_nonincentive[[i]], tweet_clusters[[j]])
-  }
-}
-
-
-
-setwd("/Users/smith/Google Drive/final/data")  # CHANGE BACK TO ../data
-sentiments_nonincentive <- read_csv("tweets_nodup_predicted_nonincentive.csv")
-tweet_clust_sentiments_nonincentive <- list()
-for(i in 1:3) {
-  ids <- tweet_new_clust_nonincentive[[i]]
-  tweet_clust_sentiments_nonincentive[[i]] <- sentiments_nonincentive[ids, 2]
-}
-
-table(tweet_clust_sentiments_nonincentive[[1]])
-table(tweet_clust_sentiments_nonincentive[[2]])
-table(tweet_clust_sentiments_nonincentive[[3]])
-
+#setwd("/Users/smith/Google Drive/final/data")  # CHANGE BACK TO ../data
+sentiments_nonincentive <- read_csv("tweets_no_dup_nonincentive_v3_predicted.csv")
+# tweet_clust_sentiments_nonincentive <- list()
+# for(i in 1:3) {
+#   ids <- tweets_clustered[[i]]
+#   tweet_clust_sentiments_nonincentive[[i]] <- sentiments_nonincentive[ids, 2]
+# }
+# print(length(ids))
+# print(tweet_clust_sentiments_nonincentive)
 
 # getting sentiments for indiv. clusters
 individual_noninc <- vector(mode = "list", length = k_opt_lda)
@@ -260,6 +260,17 @@ for(i in 1:k_opt_lda) {
   sents <- c(sents, ifelse(t[1] < t[3], 'positive', 'negative'))
 }
 
+table(sents)
 
-  
-  
+
+# trying to get tweets within a certain clusters
+
+clust = 24    #clust is which cluster from the IDM graphic we want to investigate
+clust_index = match(clust,new.order)
+clust_list <- tweet_clusters[[clust_index]]
+print(clust_list)
+length(clust_list)
+
+tweets_clustered[]
+
+
