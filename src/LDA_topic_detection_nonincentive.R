@@ -237,8 +237,8 @@ for(i in 1:3) {
 
 
 
-setwd("/Users/smith/Desktop/sasha-sandbox/data")  # CHANGE BACK TO ../data
-sentiments_nonincentive <- read_csv("tweets_predicted_nonincentive.csv")
+setwd("/Users/smith/Google Drive/final/data")  # CHANGE BACK TO ../data
+sentiments_nonincentive <- read_csv("tweets_nodup_predicted_nonincentive.csv")
 tweet_clust_sentiments_nonincentive <- list()
 for(i in 1:3) {
   ids <- tweet_new_clust_nonincentive[[i]]
