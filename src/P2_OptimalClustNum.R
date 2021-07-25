@@ -3,7 +3,7 @@ install.packages('factoextra')
 library('factoextra')
 library('readr')
 
-
+setwd("/Users/smith/Google Drive/BDSI/final")
 ## Read in data
 setwd("./data")
 d_hat <- read_csv("d_hat.csv")
