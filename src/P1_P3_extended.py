@@ -73,7 +73,7 @@ print(remove_list)
 tweetsProcessed = res_list
 print("# tweets after removing duplicates: " + str(len(tweetsProcessed)))
 
-for i in remove_list:
+for i in reversed(remove_list):
     del tweets_dup[i]
 
 tweets_nodup = tweets_dup
